@@ -1,0 +1,20 @@
+{
+  "name": "liquidrazor/regex",
+  "description": "An intuitive, simple and powerful Regex library for PHP.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Petru Szemereczki",
+      "email": "petru.szemereczki@proton.me"
+    }
+  ],
+  "require": {
+    "php": ">=8.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "LiquidRazor\\Regex\\": "src/"
+    }
+  }
+}
