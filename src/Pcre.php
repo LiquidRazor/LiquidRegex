@@ -41,10 +41,25 @@ final readonly class Pcre
 
     public static function isValid(?string $pattern): bool
     {
-        if (null === $pattern) {
+        if (!is_string($pattern) || $pattern === '') {
             return false;
         }
 
-        return (bool)preg_match("/^\/.+\/[a-z]*$/i", $pattern);
+        if(!preg_match("/^\/.+\/[a-z]*$/i", $pattern)) {
+            return false;
+        };
+
+        error_clear_last();
+        $ok = @preg_match($pattern, '');
+
+        if ($ok === false) {
+            // Compilation failed (invalid pattern/options).
+            // We only need a boolean here; do not throw to keep API simple.
+            return false;
+        }
+
+        // On some environments, preg_last_error may be non-zero even if $ok !== false.
+        // Treat any error code as invalid.
+        return preg_last_error() === PREG_NO_ERROR;
     }
 }
