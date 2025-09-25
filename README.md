@@ -167,7 +167,7 @@ Pcre::isJitSupported();  // bool
 Pcre::isValid('/^[a-z]+$/i'); // quick sanity check for "/.../flags"-style patterns
 ```
 
-> Note: `isValid()` only checks a basic `/.../flags` shape; it does not fully compile the pattern.
+> Note: `isValid()` only checks a basic `/.../flags` shape, also does compile the pattern and checks the result. If compilation fails, it returns false.
 
 ---
 
