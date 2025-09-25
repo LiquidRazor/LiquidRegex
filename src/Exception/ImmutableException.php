@@ -1,10 +1,10 @@
 <?php
 
-namespace LiquidRazor\Regex;
+namespace LiquidRazor\Regex\Exception;
 
 use RuntimeException;
 
-class Immutable extends RuntimeException
+class ImmutableException extends RuntimeException
 {
     public function __construct(string $target)
     {
