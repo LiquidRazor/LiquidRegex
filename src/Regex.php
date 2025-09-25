@@ -2,11 +2,8 @@
 
 namespace LiquidRazor\Regex;
 
-use function error_clear_last;
-use function is_callable;
-use function preg_match;
-use function preg_replace;
-use function preg_replace_callback;
+use LiquidRazor\Regex\Exception\Exception;
+use LiquidRazor\Regex\Result\ResultTypes;
 
 final class Regex
 {
@@ -33,24 +30,26 @@ final class Regex
 
     public function match(
         string $haystack,
-        Match_\Flags|int $flags = Match_\Flags::Default,
+        Lib\Flags|int $flags = Lib\Flags::Default,
         int $offset = 0,
-    ): Match_\Result {
-        if ($flags instanceof Match_\Flags) {
+        int $resultFlags = ResultTypes::BOTH,
+    ): Result\Matches\Result {
+        if ($flags instanceof Lib\Flags) {
             $flags = $flags->value;
         }
 
         error_clear_last();
         $result = preg_match($this->pattern, $haystack, $matches, $offset, $flags);
         if (false === $result) {
-            throw Match_\Exception::fromInternalError();
+            throw Exception::fromInternalError();
         }
 
-        return new Match_\Result(
+        return new Result\Matches\Result(
             pattern: $this->pattern,
             haystack: $haystack,
-            matches: $matches,
             didMatch: (bool)$result,
+            matches: $matches,
+            flags: $resultFlags,
         );
     }
 
@@ -58,7 +57,7 @@ final class Regex
         string|array $haystack,
         string|array|callable $replacement,
         int $limit = -1,
-    ): Replace\Result {
+    ): Result\Replace\Result {
         error_clear_last();
 
         if (is_callable($replacement)) {
@@ -79,17 +78,17 @@ final class Regex
             );
         }
         if (false === $result) {
-            throw Replace\Exception::fromInternalError();
+            throw Exception::fromInternalError();
         }
 
-        return new Replace\Result(
+        return new Result\Replace\Result(
             pattern: $this->pattern,
             count: $count,
             replaced: $result,
         );
     }
 
-    public function replaceNamed(string $haystack, string $template, int $limit = -1): Replace\Result
+    public function replaceNamed(string $haystack, string $template, int $limit = -1): Result\Replace\Result
     {
         error_clear_last();
         $result = preg_replace_callback(
@@ -106,10 +105,10 @@ final class Regex
         );
 
         if (false === $result) {
-            throw Replace\Exception::fromInternalError();
+            throw Exception::fromInternalError();
         }
 
-        return new Replace\Result(
+        return new Result\Replace\Result(
             pattern: $this->pattern,
             count: $count,
             replaced: $result,

@@ -1,6 +1,6 @@
 <?php
 
-namespace LiquidRazor\Regex\Match_;
+namespace LiquidRazor\Regex\Lib;
 
 enum Flags: int
 {
