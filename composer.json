@@ -7,8 +7,16 @@
     {
       "name": "Petru Szemereczki",
       "email": "petru.szemereczki@proton.me"
+    },
+    {
+      "name": "Noramarth",
+      "email": "noramarth@aom.ro"
     }
   ],
+  "support": {
+    "issues": "https://github.com/LiquidRazor/LiquidRegex/issues",
+    "source": "https://github.com/LiquidRazor/LiquidRegex"
+  },
   "require": {
     "php": ">=8.3"
   },
