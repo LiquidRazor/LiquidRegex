@@ -1,5 +1,5 @@
 {
-  "name": "liquidrazor/regex",
+  "name": "liquidrazor/liquid-regex",
   "description": "An intuitive, simple and powerful Regex library for PHP.",
   "type": "library",
   "license": "MIT",
