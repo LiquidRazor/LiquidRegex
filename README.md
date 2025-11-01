@@ -2,7 +2,7 @@
 
 An intuitive, small, and fast **regular expression helper for PHP 8.3+** with clean result objects and a few ergonomic utilities around PCRE.
 
-> Package: `liquidrazor/regex` • License: MIT
+> Package: `liquidrazor/liquid-regex` • License: MIT
 
 ---
 
